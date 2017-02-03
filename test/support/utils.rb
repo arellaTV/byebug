@@ -1,5 +1,6 @@
 require 'support/matchers'
 require 'support/temporary'
+require 'open3'
 
 module Byebug
   #
@@ -206,6 +207,21 @@ module Byebug
           'Hello world'
         end
       RUBY
+    end
+
+    #
+    # Runs program <cmd> in a subprocess feeding it with some input <input> and
+    # returns the output of the program.
+    #
+    # @param cmd Command line to be run
+    # @param input Input string to feed to the program
+    #
+    # @return Program's output
+    #
+    def run_program(cmd, input)
+      stdout, = Open3.capture2(cmd, stdin_data: input)
+
+      stdout
     end
   end
 end
