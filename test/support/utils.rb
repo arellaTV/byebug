@@ -212,8 +212,8 @@ module Byebug
     #
     # @return Program's output
     #
-    def run_program(cmd, input)
-      stdout, = Open3.capture2(cmd, stdin_data: input)
+    def run_program(cmd, input = '')
+      stdout, = Open3.capture2e(cmd, stdin_data: input)
 
       stdout
     end
